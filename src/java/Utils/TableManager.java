@@ -172,28 +172,17 @@ public class TableManager {
     public void updateRecord(HashMap<String, String> values, String pk) throws SQLException{
         Statement q = conn.getStmt();
         String sql = "UPDATE "+ tableName + " SET ";
-        StringBuilder cols = new StringBuilder();
+        StringBuilder aux = new StringBuilder();
         StringBuilder vals = new StringBuilder();
         
         for(String key: values.keySet()){
-            cols.append(key);
-            cols.append(", ");
-            
-            //Checa si el valor es un varchar y necesita comilla simple (')
-            //por ahora el cliente debe mandar el valor con commilla simple 
-//            if(Integer.parseInt(getFieldByName(key).type) == Types.VARCHAR ){
-//                vals.append("'");
-//                vals.append(values.get(key));
-//                vals.append("'");
-//            }else{
-//                vals.append(values.get(key));
-//            }
-            vals.append(values.get(key));
-            vals.append(", ");
+            aux.append(key);
+            aux.append(" = ");
+            aux.append(values.get(key));
+            aux.append(", ");
         }
-        cols.deleteCharAt(cols.length()-2);
-        vals.deleteCharAt(vals.length()-2);
-        sql = sql + cols.toString() + " ) " + " VALUES ( " + vals.toString() + ") ";
+        aux.deleteCharAt(aux.length()-2);
+        sql = sql + aux.toString() + " WHERE " + getPk().name +" = " + pk;
         //System.out.println(sql);
         q.executeUpdate(sql);
         

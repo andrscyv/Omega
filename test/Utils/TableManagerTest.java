@@ -55,7 +55,7 @@ public class TableManagerTest {
         fields.add(new TableField("c1","Varchar(20)",true));
         fields.add(new TableField("c3","INTEGER",false));
         try { 
-            TableManager t2 = new TableManager("tabla7","PruebaOmega","root","root", fields);
+           // TableManager t2 = new TableManager("tabla7","PruebaOmega","root","root", fields);
         } catch (Exception ex) {
             Logger.getLogger(TableManagerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,11 +82,24 @@ public class TableManagerTest {
         System.out.println("===================================");
         System.out.println("=========INSERT RECORDS  =============");
         System.out.println("===================================");
-        TableManager t = new TableManager("P","PruebaOmega","root","root");
+        TableManager t = new TableManager("TABLA7","PruebaOmega","root","root");
         HashMap<String, String> values = new HashMap();
-        values.put("var", "'un var'");
-        values.put("inte", "1");
+        values.put("c1", "'un var'");
+        values.put("c3", "1");
         t.insertRecord(values);
+    }
+    
+    @Test
+    public void testUpdateRecord() throws Exception{
+        System.out.println("===================================");
+        System.out.println("=========UPDATE RECORDS  ==========");
+        System.out.println("===================================");
+        TableManager t = new TableManager("TABLA7","PruebaOmega","root","root");
+        HashMap<String, String> values = new HashMap();
+        //values.put("c1", "'un var'");
+        String pk = "'un var'";
+        values.put("c3", "22");
+        t.updateRecord(values, pk);
     }
     
     
