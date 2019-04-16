@@ -139,7 +139,7 @@ public class TableManager {
         
         return res;
     }
-    public void insertRecord(HashMap<String, String> values){
+    public void insertRecord(HashMap<String, String> values) throws SQLException{
         Statement q = conn.getStmt();
         String sql = "INSERT INTO "+ tableName + " ( ";
         StringBuilder cols = new StringBuilder();
@@ -164,7 +164,38 @@ public class TableManager {
         cols.deleteCharAt(cols.length()-2);
         vals.deleteCharAt(vals.length()-2);
         sql = sql + cols.toString() + " ) " + " VALUES ( " + vals.toString() + ") ";
-        System.out.println(sql);
+        //System.out.println(sql);
+        q.executeUpdate(sql);
+        
+    }
+    
+    public void updateRecord(HashMap<String, String> values, String pk) throws SQLException{
+        Statement q = conn.getStmt();
+        String sql = "UPDATE "+ tableName + " SET ";
+        StringBuilder cols = new StringBuilder();
+        StringBuilder vals = new StringBuilder();
+        
+        for(String key: values.keySet()){
+            cols.append(key);
+            cols.append(", ");
+            
+            //Checa si el valor es un varchar y necesita comilla simple (')
+            //por ahora el cliente debe mandar el valor con commilla simple 
+//            if(Integer.parseInt(getFieldByName(key).type) == Types.VARCHAR ){
+//                vals.append("'");
+//                vals.append(values.get(key));
+//                vals.append("'");
+//            }else{
+//                vals.append(values.get(key));
+//            }
+            vals.append(values.get(key));
+            vals.append(", ");
+        }
+        cols.deleteCharAt(cols.length()-2);
+        vals.deleteCharAt(vals.length()-2);
+        sql = sql + cols.toString() + " ) " + " VALUES ( " + vals.toString() + ") ";
+        //System.out.println(sql);
+        q.executeUpdate(sql);
         
     }
     

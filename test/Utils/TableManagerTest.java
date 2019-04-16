@@ -84,7 +84,7 @@ public class TableManagerTest {
         System.out.println("===================================");
         TableManager t = new TableManager("P","PruebaOmega","root","root");
         HashMap<String, String> values = new HashMap();
-        values.put("var", "un var");
+        values.put("var", "'un var'");
         values.put("inte", "1");
         t.insertRecord(values);
     }
