@@ -78,7 +78,7 @@ public class DbConnection {
 //                                "p1");
 //       c.close()
 
-    DbConnection db = new DbConnection("PruebaOmega","root","root");
+    DbConnection db = new DbConnection("Omega","root","root");
     //db.createDb("p3", "p3", "p3");
         //System.out.println("Create db ");
     }
