@@ -5,6 +5,8 @@
  */
 package RestWs;
 
+import AuthWSSClient.Exception_Exception;
+import AuthWSSClient.User;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -51,16 +53,50 @@ public class AuthResource {
      * @param content representation for the resource
      */
     @PUT
-    @Consumes(MediaType.TEXT_HTML)
-    public void putHtml(String content) {
+    @Produces("application/json")
+    public String putHtml(@FormParam("userName")String userName, @FormParam("password")String password, @FormParam("dbName")String dbName) {
+        JSONObject res = new JSONObject();
+        try{
+            User u = createNewUser(userName, password,dbName);
+            res.put("userName", u.getUserName());
+            res.put("dbName", u.getDbName());
+        }
+        catch(Exception e){
+            res.put("error", e.getMessage());
+        }
+        
+
+        return res.toString();
     }
+    
     
     @POST
     @Produces("application/json")
-    public String postHtml(@FormParam("userName")String userName) {
+    public String postHtml(@FormParam("userName")String userName, @FormParam("password")String password) {
         JSONObject res = new JSONObject();
-        res.put("user_name", userName);
+        try{
+            User u = signInUser(userName, password);
+            res.put("userName", u.getUserName());
+            res.put("dbName", u.getDbName());
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
+        
+
         return res.toString();
+    }
+
+    private static User signInUser(java.lang.String userName, java.lang.String password) {
+        AuthWSSClient.Auth_Service service = new AuthWSSClient.Auth_Service();
+        AuthWSSClient.Auth port = service.getAuthPort();
+        return port.signInUser(userName, password);
+    }
+
+    private static User createNewUser(java.lang.String userName, java.lang.String password, java.lang.String dbName) throws Exception_Exception {
+        AuthWSSClient.Auth_Service service = new AuthWSSClient.Auth_Service();
+        AuthWSSClient.Auth port = service.getAuthPort();
+        return port.createNewUser(userName, password, dbName);
     }
     
     

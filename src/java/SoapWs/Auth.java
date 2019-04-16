@@ -7,6 +7,8 @@ package SoapWs;
 
 import Beans.User;
 import Utils.DbConnection;
+import WSSExceptions.SimpleException;
+import WSSExceptions.SimpleExceptionBean;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,8 +37,8 @@ public class Auth {
 
     /**
      * Web service operation
-     * @throws java.sql.SQLException
-     * @throws java.lang.Exception
+     * 
+     *
      */
     @WebMethod(operationName = "createNewUser")
     public User createNewUser(@WebParam(name = "userName") String userName, @WebParam(name = "password") String password, @WebParam(name = "dbName") String dbName) 
@@ -56,7 +58,7 @@ public class Auth {
             //db.createDb(dbName, userName, password);
         } catch (SQLException ex) {
             Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, ex);
-            throw new Exception("[Auth]: Sql exception");
+            throw new SQLException("[Auth]: "+ex);
         }
         finally{
             db.closeResources();
@@ -67,9 +69,10 @@ public class Auth {
 
     /**
      * Web service operation
+     * 
      */
     @WebMethod(operationName = "signInUser")
-    public User signInUser(@WebParam(name = "userName") String userName, @WebParam(name = "password") String password) 
+    public User signInUser(@WebParam(name = "userName") String userName, @WebParam(name = "password") String password) throws Exception
     {
         DbConnection db = new DbConnection("Omega","root","root");
         User res = new User();
@@ -83,10 +86,12 @@ public class Auth {
                 res.dbName = rs.getString("db_name");
                 res.userName = rs.getString("user_name");
             }
+            else
+                throw new SQLException("[Auth]: No matching user");
         } catch (SQLException ex) {
             Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, ex);
-           // throw new Exception("[Auth]: Sql exception");
-            System.out.println(ex);
+            throw ex;
+            //sSystem.out.println(ex);
         }
         catch(Exception e){
             Logger.getLogger(Auth.class.getName()).log(Level.SEVERE, null, e);
