@@ -14,6 +14,9 @@ public class TableField {
     public String type;
     public boolean isPrimaryKey;
 
+    public TableField() {
+    }
+    
     public TableField(String name, String type, boolean isPrimaryKey) {
         this.name = name;
         this.type = type;
