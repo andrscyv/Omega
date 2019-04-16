@@ -11,6 +11,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -108,24 +109,66 @@ public class TableManager {
     
     public ArrayList<HashMap<String,String>> getRecords(int start, int end) throws SQLException{
         ArrayList<HashMap<String,String>> res = new ArrayList<>();
+        HashMap<String, String> it ;
         Statement q = conn.getStmt();
         TableField pk = getPk();
         String sql = "SELECT * FROM "+tableName+" ORDER BY "+pk.name+" OFFSET "
-                + start+ " ROWS FETCH NEXT "+end+ " ROWS ONLY;";
+                + start+ " ROWS FETCH NEXT "+end+ " ROWS ONLY";
+        //System.out.println(sql);
         ResultSet rs = q.executeQuery(sql);
         while( rs.next() ){
-            
+            it = new HashMap<>();
+            for(TableField f : fields){
+                it.put(f.name, rs.getString(f.name));
+                //System.out.print(f.name +" :" + rs.getString(f.name) + ";");
+
+            }
+            res.add(it);
+           // System.out.println("");
         }
         
         return res;
     }
-    
-    private Method getRsMethod(String colType){
-        Method res = null;
-        HashMap<String,String> methodMapper = new HashMap<>();
-        //methodMapper.put("", colType)
+    private TableField getFieldByName(String name){
+        TableField res = null;
+        
+        for(TableField f: fields){
+            if( f.name.equals(name) )
+                res = f;
+        }
+        
         return res;
     }
+    public void insertRecord(HashMap<String, String> values){
+        Statement q = conn.getStmt();
+        String sql = "INSERT INTO "+ tableName + " ( ";
+        StringBuilder cols = new StringBuilder();
+        StringBuilder vals = new StringBuilder();
+        
+        for(String key: values.keySet()){
+            cols.append(key);
+            cols.append(", ");
+            
+            //Checa si el valor es un varchar y necesita comilla simple (')
+            //por ahora el cliente debe mandar el valor con commilla simple 
+//            if(Integer.parseInt(getFieldByName(key).type) == Types.VARCHAR ){
+//                vals.append("'");
+//                vals.append(values.get(key));
+//                vals.append("'");
+//            }else{
+//                vals.append(values.get(key));
+//            }
+            vals.append(values.get(key));
+            vals.append(", ");
+        }
+        cols.deleteCharAt(cols.length()-2);
+        vals.deleteCharAt(vals.length()-2);
+        sql = sql + cols.toString() + " ) " + " VALUES ( " + vals.toString() + ") ";
+        System.out.println(sql);
+        
+    }
+    
+
     
     public static void main(String[] args) throws Exception{
         
