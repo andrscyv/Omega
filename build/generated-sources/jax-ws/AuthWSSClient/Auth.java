@@ -72,16 +72,21 @@ public interface Auth {
      * @param userName
      * @return
      *     returns AuthWSSClient.User
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "signInUser", targetNamespace = "http://SoapWs/", className = "AuthWSSClient.SignInUser")
     @ResponseWrapper(localName = "signInUserResponse", targetNamespace = "http://SoapWs/", className = "AuthWSSClient.SignInUserResponse")
-    @Action(input = "http://SoapWs/Auth/signInUserRequest", output = "http://SoapWs/Auth/signInUserResponse")
+    @Action(input = "http://SoapWs/Auth/signInUserRequest", output = "http://SoapWs/Auth/signInUserResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://SoapWs/Auth/signInUser/Fault/Exception")
+    })
     public User signInUser(
         @WebParam(name = "userName", targetNamespace = "")
         String userName,
         @WebParam(name = "password", targetNamespace = "")
-        String password);
+        String password)
+        throws Exception_Exception
+    ;
 
 }

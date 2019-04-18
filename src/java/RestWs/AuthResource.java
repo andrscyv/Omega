@@ -5,6 +5,8 @@
  */
 package RestWs;
 
+//import AuthWSSClient.Exception_Exception;
+//import AuthWSSClient.User;
 import AuthWSSClient.Exception_Exception;
 import AuthWSSClient.User;
 import javax.ws.rs.core.Context;
@@ -87,7 +89,7 @@ public class AuthResource {
         return res.toString();
     }
 
-    private static User signInUser(java.lang.String userName, java.lang.String password) {
+    private static User signInUser(java.lang.String userName, java.lang.String password) throws Exception_Exception {
         AuthWSSClient.Auth_Service service = new AuthWSSClient.Auth_Service();
         AuthWSSClient.Auth port = service.getAuthPort();
         return port.signInUser(userName, password);

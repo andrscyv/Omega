@@ -38,6 +38,7 @@
 <operation name="signInUser">
 <input wsam:Action="http://SoapWs/Auth/signInUserRequest" message="tns:signInUser"/>
 <output wsam:Action="http://SoapWs/Auth/signInUserResponse" message="tns:signInUserResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://SoapWs/Auth/signInUser/Fault/Exception"/>
 </operation>
 </portType>
 <binding name="AuthPortBinding" type="tns:Auth">
@@ -71,6 +72,9 @@
 <output>
 <soap:body use="literal"/>
 </output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
 </operation>
 </binding>
 <service name="Auth">
