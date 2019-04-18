@@ -5,6 +5,7 @@
  */
 package Utils;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -83,6 +84,8 @@ public class TableManagerTest {
         System.out.println("=========INSERT RECORDS  =============");
         System.out.println("===================================");
         TableManager t = new TableManager("TABLA7","PruebaOmega","root","root");
+        String pk = "'un var'";
+        t.deleteRecord(pk);
         HashMap<String, String> values = new HashMap();
         values.put("c1", "'un var'");
         values.put("c3", "1");
@@ -100,6 +103,28 @@ public class TableManagerTest {
         String pk = "'un var'";
         values.put("c3", "22");
         t.updateRecord(values, pk);
+    }
+    
+    @Test
+    public void testDeleteRecord(){
+        try {
+            System.out.println("===================================");
+            System.out.println("=========DELETE RECORDS  ==========");
+            System.out.println("===================================");
+            TableManager t = new TableManager("TABLA6","PruebaOmega","root","root");
+            HashMap<String, String> values = new HashMap();
+            values.put("c1", "'paraBorrar'");
+            values.put("c3", "1");
+            t.insertRecord(values);
+            String pk = "'paraBorrar'";
+            t.deleteRecord(pk);
+        } catch (SQLException ex) {
+            Logger.getLogger(TableManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TableManagerTest.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
     }
     
     

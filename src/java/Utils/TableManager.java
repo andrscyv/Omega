@@ -188,6 +188,13 @@ public class TableManager {
         
     }
     
+    public void deleteRecord(String pk) throws SQLException{
+        Statement q = conn.getStmt();
+        String sql = "DELETE FROM  "+ tableName + " where " +getPk().name +" = " + pk;
+        //System.out.println(sql);
+        q.executeUpdate(sql);
+    }
+    
 
     
     public static void main(String[] args) throws Exception{
