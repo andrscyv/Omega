@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for createNewUser complex type.
+ * <p>Clase Java para createNewUser complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="createNewUser"&gt;
@@ -40,7 +40,7 @@ public class CreateNewUser {
     protected String dbName;
 
     /**
-     * Gets the value of the userName property.
+     * Obtiene el valor de la propiedad userName.
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class CreateNewUser {
     }
 
     /**
-     * Sets the value of the userName property.
+     * Define el valor de la propiedad userName.
      * 
      * @param value
      *     allowed object is
@@ -64,7 +64,7 @@ public class CreateNewUser {
     }
 
     /**
-     * Gets the value of the password property.
+     * Obtiene el valor de la propiedad password.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class CreateNewUser {
     }
 
     /**
-     * Sets the value of the password property.
+     * Define el valor de la propiedad password.
      * 
      * @param value
      *     allowed object is
@@ -88,7 +88,7 @@ public class CreateNewUser {
     }
 
     /**
-     * Gets the value of the dbName property.
+     * Obtiene el valor de la propiedad dbName.
      * 
      * @return
      *     possible object is
@@ -100,7 +100,7 @@ public class CreateNewUser {
     }
 
     /**
-     * Sets the value of the dbName property.
+     * Define el valor de la propiedad dbName.
      * 
      * @param value
      *     allowed object is
