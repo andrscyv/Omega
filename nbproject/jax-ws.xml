@@ -4,6 +4,9 @@
     <service name="Auth">
       <implementation-class>SoapWs.Auth</implementation-class>
     </service>
+    <service name="DbManager">
+      <implementation-class>SoapWs.DbManager</implementation-class>
+    </service>
   </services>
   <clients>
     <client name="Auth">
