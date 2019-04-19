@@ -4,10 +4,9 @@
     Author     : soeur
 --%>
 
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="org.json.simple.parser.JSONParser"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="Beans.RestClient"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,20 +16,19 @@
     </head>
     <body>
         <%
-            String name = request.getParameter("user");
-            String db = request.getParameter("db");
-            System.out.print(name+db);
-            if(request.getParameter("user") != null && request.getParameter("db")!=null){
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
+            if(password != null && userName != null){
+                RestClient callRest = new RestClient();
+                String answer = callRest.postHtml(userName, password);
+                JSONObject userData;
+                JSONParser parser = new JSONParser();
+                userData = (JSONObject) parser.parse(answer);
                 HttpSession mySession = request.getSession();
-                mySession.setAttribute("user", request.getParameter("user"));
-                mySession.setAttribute("dbName", request.getParameter("db"));
-
-                mySession.setMaxInactiveInterval(20);
-
+                mySession.setAttribute("userName", userData.get("userName"));
+                mySession.setAttribute("dbName", userData.get("dbName"));
+                mySession.setMaxInactiveInterval(10);
                 response.sendRedirect("tables.jsp");
-                out.println("<p> Bienvenido "+request.getParameter("user")+"</p>");
-                //out.println("<a href='profile.jsp'> Perfil </a>");
-                
             }else{
                 out.println("<p> Sesión no iniciada </p>");
                 out.println("<a href='index.html'> Iniciar sesión </a>");
