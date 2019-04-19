@@ -17,34 +17,19 @@
     </head>
     <body>
         <%
-            if(request.getParameter("password") != null && request.getParameter("userName")!=null){
-                Class.forName("org.apache.derby.jdbc.ClientDriver");
-                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Omega","root","root");
-                Statement query = con.createStatement();
-                String name = request.getParameter("userName");
-                ResultSet rs = query.executeQuery("SELECT * FROM USERS WHERE USER_NAME = '" + name + "'");
-                
-                String psswrd = "";
-                String dbName = "";
-                while(rs.next()) {
-                    psswrd = rs.getString("PASSWORD");
-                    dbName = rs.getString("DB_NAME");
-                } 
-                
-                if(request.getParameter("password").equals(psswrd)){
-                    HttpSession mySession = request.getSession();
-                    mySession.setAttribute("user", name);
-                    mySession.setAttribute("dbName", dbName);
-                    
-                    mySession.setMaxInactiveInterval(20);
-                    
-                    response.sendRedirect("tables.jsp");
-                    out.println("<p> Bienvenido "+name+"</p>");
-                    //out.println("<a href='profile.jsp'> Perfil </a>");
-                }else{
-                    out.println("<p> Datos incorrectos </p>");
-                    out.println("<a href='index.html'> Regresar al inicio </a>");
-                }
+            String name = request.getParameter("user");
+            String db = request.getParameter("db");
+            System.out.print(name+db);
+            if(request.getParameter("user") != null && request.getParameter("db")!=null){
+                HttpSession mySession = request.getSession();
+                mySession.setAttribute("user", request.getParameter("user"));
+                mySession.setAttribute("dbName", request.getParameter("db"));
+
+                mySession.setMaxInactiveInterval(20);
+
+                response.sendRedirect("tables.jsp");
+                out.println("<p> Bienvenido "+request.getParameter("user")+"</p>");
+                //out.println("<a href='profile.jsp'> Perfil </a>");
                 
             }else{
                 out.println("<p> Sesión no iniciada </p>");
