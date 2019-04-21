@@ -18,11 +18,13 @@
         <%
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
-            if(password != null && userName != null){
-                RestClient callRest = new RestClient();
-                String answer = callRest.postHtml(userName, password);
+            String dbName = request.getParameter("dbName");
+            RestClient callRest = new RestClient();
+            if(password != null && userName != null && dbName != null){ //viene de newUser
+                String answer = callRest.putHtml(userName, password, dbName);
                 JSONObject userData;
                 JSONParser parser = new JSONParser();
+
                 userData = (JSONObject) parser.parse(answer);
                 HttpSession mySession = request.getSession();
                 mySession.setAttribute("userName", userData.get("userName"));
@@ -30,9 +32,24 @@
                 mySession.setMaxInactiveInterval(10);
                 response.sendRedirect("tables.jsp");
             }else{
-                out.println("<p> Sesión no iniciada </p>");
-                out.println("<a href='index.html'> Iniciar sesión </a>");
+                if (password != null && userName != null) {
+                    
+                    String answer = callRest.postHtml(userName, password);
+                    JSONObject userData;
+                    JSONParser parser = new JSONParser();
+
+                    userData = (JSONObject) parser.parse(answer);
+                    HttpSession mySession = request.getSession();
+                    mySession.setAttribute("userName", userData.get("userName"));
+                    mySession.setAttribute("dbName", userData.get("dbName"));
+                    mySession.setMaxInactiveInterval(10);
+                    response.sendRedirect("tables.jsp");
+                } else {
+                    out.println("<p> Sesión no iniciada </p>");
+                    out.println("<a href='index.html'> Iniciar sesión </a>");
+                }
             }
+            
         %>
     </body>
 </html>

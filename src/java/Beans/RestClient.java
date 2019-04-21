@@ -36,4 +36,15 @@ public class RestClient {
         return body;
     }
     
+    public String putHtml(String userName, String password, String dbName){
+        Form form = new Form();
+        form.param("userName", userName);
+        form.param("password", password);
+        form.param("dbName", dbName);
+        Response resp = webtarget.request().put(Entity.form(form));
+        String body = resp.readEntity(String.class);
+        System.out.println("Resp: "+body);
+        resp.close();
+        return body;
+    }
 }

@@ -19,30 +19,6 @@ and open the template in the editor.
                     var user = document.getElementById("uName").value;
                     var pwd = document.getElementById("pwd").value;
                     if(user != "" && pwd != ""){
-                        //vamos a llamar al famoso servicio rest
-            /*            
-            var ajaxRequest;
-                        if (window.XMLHttpRequest){
-                            ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
-                        } else {
-                            ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
-                        }
-                        ajaxRequest.onreadystatechange = function(){
-                            if (ajaxRequest.readyState==4 && (ajaxRequest.status==200 || ajaxRequest.status==204)){
-                                console.log(ajaxRequest.responseText);
-                                var respJSON = JSON.parse(ajaxRequest.responseText);
-                                document.getElementById("name").value=respJSON.userName;
-                                document.getElementById("db").value=respJSON.dbName;
-                                //console.log("CARAJOOOOOOOOOOOOOOOOOOOO");
-                                document.forms.continueLogIn.submit();
-                               
-                                
-                            }
-                        }
-                        ajaxRequest.open(method, target, true);
-                        ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
-                        ajaxRequest.send("userName="+user+"&password="+pwd);
-                        */
                        return true;
                     }else{
                         alert("Ingrese todos los datos");
@@ -57,11 +33,7 @@ and open the template in the editor.
                 <input type="submit" value="Log in" />
             </form>
             <br>
-            <form id="continueLogIn" action="dataValidation.jsp" method="POST">
-                <input id="name" type="hidden" name="user" value="" />
-                <input id="db" type="hidden" name="db" value="" />
-            </form>
-            <a href="WEB-INF/NewUser.jsp">Crear nuevo usuario</a>
+            <a href="NewUser.jsp">Crear nuevo usuario</a>
         </div>
     </body>
 </html>

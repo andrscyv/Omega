@@ -16,7 +16,6 @@
         <%-- Este código se copia y pega en todas las vistas que tengamos --%>
         <%
             HttpSession mySession = request.getSession();
-            System.out.println(mySession);
             if(mySession.getAttribute("userName") != null){
                 out.print("<h1> Bienvenido " + mySession.getAttribute("userName"));
             }else{
