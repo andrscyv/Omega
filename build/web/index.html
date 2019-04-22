@@ -16,8 +16,10 @@ and open the template in the editor.
             <h3> Log in </h3>
             <script>
                 function checkComplete(){
-                    if(document.getElementById("uName").value != "" && document.getElementById("pwd").value != ""){
-                        return true;
+                    var user = document.getElementById("uName").value;
+                    var pwd = document.getElementById("pwd").value;
+                    if(user != "" && pwd != ""){
+                       return true;
                     }else{
                         alert("Ingrese todos los datos");
                         return false;
@@ -28,10 +30,10 @@ and open the template in the editor.
             <form action="dataValidation.jsp" method="POST" onsubmit="return checkComplete()">
                 Usuario: <input id="uName" type="text" name="userName" value="" /> <br> <br>
                 Contraseña: <input id="pwd" type="password" name="password" value="" /> <br> <br>
-                <input type="submit" value="Log in"/>
+                <input type="submit" value="Log in" />
             </form>
             <br>
-            <a href="WEB-INF/NewUser.jsp">Crear nuevo usuario</a>
+            <a href="NewUser.jsp">Crear nuevo usuario</a>
         </div>
     </body>
 </html>

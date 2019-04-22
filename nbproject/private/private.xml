@@ -3,10 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/El_jefe/NetBeansProjects/Omega/src/java/RestWs/RecordResource.java</file>
             <file>file:/Users/El_jefe/NetBeansProjects/Omega/src/java/RestWs/AuthResource.java</file>
             <file>file:/Users/El_jefe/NetBeansProjects/Omega/src/java/SoapWs/Auth.java</file>
             <file>file:/Users/El_jefe/NetBeansProjects/Omega/src/java/DbManagerWSS/DbManager.java</file>
+=======
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/web/tables.jsp</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/src/java/Beans/RestClient.java</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/src/java/Beans/User.java</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/web/index.html</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/src/java/SoapWs/Auth.java</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/src/java/Utils/DbConnection.java</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/src/java/RestWs/AuthResource.java</file>
+            <file>file:/C:/Users/soeur/Documents/ITAM/8semestre/Distribuidos/Omega/web/dataValidation.jsp</file>
+>>>>>>> ce3e0d292a50554c491222b4105510a272154e52
         </group>
     </open-files>
 </project-private>

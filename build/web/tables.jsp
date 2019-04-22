@@ -16,8 +16,8 @@
         <%-- Este código se copia y pega en todas las vistas que tengamos --%>
         <%
             HttpSession mySession = request.getSession();
-            if(mySession.getAttribute("user") != null){
-                out.print("<h1> Bienvenido " + mySession.getAttribute("user"));
+            if(mySession.getAttribute("userName") != null){
+                out.print("<h1> Bienvenido " + mySession.getAttribute("userName"));
             }else{
                 response.sendRedirect("dataValidation.jsp");
             }

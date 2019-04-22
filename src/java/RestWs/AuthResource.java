@@ -84,8 +84,6 @@ public class AuthResource {
         catch(Exception e){
             return e.getMessage();
         }
-        
-
         return res.toString();
     }
 
